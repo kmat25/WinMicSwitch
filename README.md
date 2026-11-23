@@ -41,7 +41,7 @@ dotnet build WinMicSwitch.slnx -c Release -m:1 -p:UseSharedCompilation=false
 
 2 台のマイクを使う `--two-mics` と、USB を手で抜き差しする `--hotplug` の引数・手順は[詳細設計書](docs/detailed-design.md#テストの構成)に記載しています。
 
-配布用の自己完結版は次の手順で作成・起動します。
+配布用の自己完結版は次の手順で空の出力先に作成し、起動します。Release ビルドでは開発環境のソースパスを `/_/src/WinMicSwitch` に置き換えます。配布物にはアプリとランタイム、日本語・英語用のリソース、ライセンスを含め、デバッグ用の PDB は含めません。利用者は ZIP をすべて展開すれば、.NET を追加インストールせずに起動できます。
 
 ```powershell
 dotnet publish src/WinMicSwitch/WinMicSwitch.csproj -c Release -r win-x64 --self-contained true -p:UseSharedCompilation=false -p:PublishTrimmed=false -p:PublishSingleFile=false -o artifacts/publish/win-x64 --source https://api.nuget.org/v3/index.json
