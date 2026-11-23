@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/WinMicSwitch/WinMicSwitch.csproj"/>
+  <Project Path="tests/WinMicSwitch.Tests/WinMicSwitch.Tests.csproj"/>
+</Solution>
