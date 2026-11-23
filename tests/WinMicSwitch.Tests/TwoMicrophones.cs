@@ -64,7 +64,7 @@ internal static partial class Program
             Post(menu.Handle, 0x100, (int)Keys.Enter, 0);
             Wait(() => !menu.Visible && AudioState.Roles.All(r => observer.Default(r) == mic.Id)
                 && state.Current == mic.Id && state.VolumeWatch && state.Muted == previous[mic]
-                && tray.Text.Contains(previous[mic] ? "ミュート" : "収音中"),
+                && tray.Text.Contains(previous[mic] ? "消音中" : "収音中"),
                 "selected all three roles: " + mic.Name);
             Check(previous.All(p => observer.Mute(p.Key.Id) == p.Value), "both mute flags preserved");
             Open();
@@ -89,7 +89,7 @@ internal static partial class Program
             observer.SetMute(second.Id, false);
             Wait(() => state.Current == second.Id && state.Muted == false && tray.Text.Contains("収音中"), "external USB unmute notification");
             observer.SetMute(second.Id, true);
-            Wait(() => state.Muted == true && tray.Text.Contains("ミュート"), "external USB mute notification");
+            Wait(() => state.Muted == true && tray.Text.Contains("消音中"), "external USB mute notification");
             Select(first);
             Select(second);
             Select(first);

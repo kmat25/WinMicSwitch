@@ -65,7 +65,7 @@ internal static partial class Program
         Refresh(volume:false);
         Check(state.Status == "状態不明", "volume notification failure");
         Refresh();
-        Check(TrayText.Tooltip(state) == "WinMicSwitch: 100% ミュート USB", "muted microphone retains its volume");
+        Check(TrayText.Tooltip(state) == "WinMicSwitch: 100% 消音中 USB", "muted microphone retains its volume");
         Check(state.Status == "消音中", "notification recovery");
         fake.Mics = [];
         Refresh(false);

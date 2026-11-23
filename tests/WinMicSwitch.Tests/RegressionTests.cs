@@ -54,7 +54,7 @@ internal static partial class Program
         }
         try
         {
-            PumpUntil(() => tray.Text.Contains(initial ? "ミュート" : "収音中"));
+            PumpUntil(() => tray.Text.Contains(initial ? "消音中" : "収音中"));
             int direction = initialLevel > .5f ? -120 : 120;
             var state = Field<AudioState>(app, "state");
             Check(Field<TrayWheel>(app, "wheel").Registered, "raw mouse registration");
@@ -67,14 +67,14 @@ internal static partial class Program
             PumpUntil(() => tray.Text.StartsWith($"WinMicSwitch: {originalPercent}% "));
             Post(window.Handle, InputCapture.TrayCallback, 1, 0x202);
             PumpUntil(() => observer.Mute(id) != initial && notifications > 0);
-            Check(tray.Text.Contains(initial ? "収音中" : "ミュート"), "live tray toggle reflected in Core Audio and tooltip");
+            Check(tray.Text.Contains(initial ? "収音中" : "消音中"), "live tray toggle reflected in Core Audio and tooltip");
             Thread.Sleep(32);
             Post(window.Handle, InputCapture.TrayCallback, 1, 0x202);
             PumpUntil(() => observer.Mute(id) == initial && notifications >= 2);
             observer.SetMute(id, !initial);
-            PumpUntil(() => tray.Text.Contains(initial ? "収音中" : "ミュート"));
+            PumpUntil(() => tray.Text.Contains(initial ? "収音中" : "消音中"));
             observer.SetMute(id, initial);
-            PumpUntil(() => tray.Text.Contains(initial ? "ミュート" : "収音中"));
+            PumpUntil(() => tray.Text.Contains(initial ? "消音中" : "収音中"));
             Post(window.Handle, InputCapture.TrayCallback, 1, 0x205);
             PumpUntil(() => menu.Visible);
             var item = menu.Items.OfType<ToolStripMenuItem>().Single(m => m.Checked);

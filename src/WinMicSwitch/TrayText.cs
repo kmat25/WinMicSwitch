@@ -8,10 +8,9 @@ internal static class TrayText
 
     internal static string Tooltip(AudioState state)
     {
-        string status = state.Muted == true && !state.LostWatch ? Ui.Text("ミュート", "Muted") : state.Status;
         string volume = !state.LostWatch && state.VolumePercent is int percent
             ? $"{percent}% " : "";
-        string full = $"WinMicSwitch: {volume}{status}";
+        string full = $"WinMicSwitch: {volume}{state.Status}";
         if (state.LostWatch)
         {
             full += Ui.Text("／自動更新停止", " / Updates paused");
